@@ -10,6 +10,7 @@ public class HelloThreadWorld {
             thread.join();
 
             // runnable
+            //noinspection Convert2Lambda
             Runnable task = new Runnable() {
                 @Override
                 public void run() {
@@ -21,6 +22,7 @@ public class HelloThreadWorld {
             thread.join();
 
             // anonymous runnable
+            //noinspection Convert2Lambda
             thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -31,9 +33,7 @@ public class HelloThreadWorld {
             thread.join();
 
             // lambda expression
-            thread = new Thread(() -> {
-                System.out.println("New Thread #4");
-            });
+            thread = new Thread(() -> System.out.println("New Thread #4"));
             thread.start();
             thread.join();
 
