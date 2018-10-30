@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Threading</title>
+</head>
+<body>
+Hello, World! Testing Javascript Multithreading (worker)
+
+<button onclick="startWorkerThread()">start</button>
+<button onclick="stopWorkerThread()">stop</button>
+<p><output id="result">Worker Result?</output></p>
+
+<script type="application/javascript">
+
+    var myThreadWorker;
+
+    function startWorkerThread() {
+        console.log("[main] Start Worker");
+        if (typeof(Worker) !== "undefined") {
+            if (typeof(myThreadWorker) == "undefined") {
+                myThreadWorker = new Worker("myworker.js");
+            }
+        }
+        myThreadWorker.onmessage = function (e) {
+            console.log("[main] recieved from worker:" + JSON.stringify(e.data));
+            switch (e.data.type) {
+                case "msg":
+                    if (e.data.content === "confirm-termination") {
+                        myThreadWorker = undefined;
+                        document.getElementById("result").innerHTML = "Worker Result?";
+                    }
+                    break;
+                case "data":
+                    document.getElementById("result").innerHTML = e.data.content;
+            }
+
+        };
+    };
+
+    function stopWorkerThread() {
+        console.log("[main] Stop Worker");
+        if (typeof(myThreadWorker) !== "undefined") {
+            myThreadWorker.postMessage({"cmd":"stop"});
+        }
+    };
+</script>
+</body>
+</html>
