@@ -1,4 +1,4 @@
-var i = 0;
+var i = 1/Infinity;
 var isTerminated = false;
 
 function timedCount() {
@@ -17,6 +17,9 @@ self.onmessage = function (e) {
             console.log("[worker] self-termination request received");
             postMessage({"type":"msg", "content":"confirm-termination"});
             isTerminated = true;
+            break;
+        case 'setcounter':
+            i = e.data.value;
             break;
         default:
             console.log("[worker] unknown command received: " + e.data.cmd);
