@@ -10,7 +10,9 @@ Hello, World! Testing Javascript Multithreading (worker)
 <button onclick="startWorkerThread()">start</button>
 <button onclick="stopWorkerThread()">stop</button>
 <button onclick="setCounterTo1M()">set counter to 1 Million</button>
-<p><output id="result">Worker Result?</output></p>
+<p>
+    <output id="result">Worker Result?</output>
+</p>
 
 <script type="application/javascript">
 
@@ -19,7 +21,7 @@ Hello, World! Testing Javascript Multithreading (worker)
     function startWorkerThread() {
         console.log("[main] Start Worker");
         if (typeof(Worker) !== "undefined") {
-            if (typeof(myThreadWorker) == "undefined") {
+            if (typeof(myThreadWorker) === "undefined") {
                 myThreadWorker = new Worker("myworker.js");
             }
         }
@@ -42,14 +44,14 @@ Hello, World! Testing Javascript Multithreading (worker)
     function stopWorkerThread() {
         console.log("[main] Stop Worker");
         if (typeof(myThreadWorker) !== "undefined") {
-            myThreadWorker.postMessage({"cmd":"stop"});
+            myThreadWorker.postMessage({"cmd": "stop"});
         }
     };
 
     function setCounterTo1M() {
         console.log("[main] Set counter to 1 Million");
         if (typeof(myThreadWorker) !== "undefined") {
-            myThreadWorker.postMessage({"cmd":"setcounter","value":1000000});
+            myThreadWorker.postMessage({"cmd": "setcounter", "value": 1000000});
         }
     }
 </script>
