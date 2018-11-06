@@ -11,13 +11,14 @@ class UniqueNumberList {
     void checkForRedundantNumber() {
         boolean foundDuplicate = false;
 
-        Vector<Integer> copy = new Vector<>(list);
-
         for (int i : list) {
-            copy.remove(i);
-            if (copy.contains(i)) {
+            int count = 0;
+            for (int j : list)
+                if (i==j)
+                    count++;
+            if (count > 1) {
                 foundDuplicate = true;
-                System.out.println("Found duplicated number: " + i);
+                System.out.println("Found " + count + " instances of " + i);
             }
         }
         if (!foundDuplicate) System.out.println("Didn't find any duplicate numbers.");
