@@ -37,7 +37,7 @@ public class InterruptPatternTraining {
             // interrupt after random sleep time
             myThread = new MyThread();
             myThread.start();
-            Thread.sleep((int) (Math.random()*1000));
+            Thread.sleep((int) (Math.random() * 1000));
             myThread.interrupt();
             myThread.join();
 

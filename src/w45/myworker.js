@@ -1,4 +1,4 @@
-var i = 1/Infinity;
+var i = 1 / Infinity;
 var isTerminated = false;
 
 function timedCount() {
@@ -6,7 +6,7 @@ function timedCount() {
         setTimeout("timedCount()", 500)
         i = i + 1;
         console.log("[worker] posting :" + i);
-        postMessage({"type":"data", "content":i});
+        postMessage({"type": "data", "content": i});
     } else self.close();
 }
 
@@ -15,7 +15,7 @@ self.onmessage = function (e) {
     switch (e.data.cmd) {
         case 'stop':
             console.log("[worker] self-termination request received");
-            postMessage({"type":"msg", "content":"confirm-termination"});
+            postMessage({"type": "msg", "content": "confirm-termination"});
             isTerminated = true;
             break;
         case 'setcounter':
@@ -23,7 +23,7 @@ self.onmessage = function (e) {
             break;
         default:
             console.log("[worker] unknown command received: " + e.data.cmd);
-            postMessage({"type":"msg", "content":"unknown-command: " + e.data.cmd});
+            postMessage({"type": "msg", "content": "unknown-command: " + e.data.cmd});
     }
 }
 timedCount();
