@@ -22,6 +22,4 @@ class UniqueNumberList {
         }
         if (!foundDuplicate) System.out.println("Didn't find any duplicate numbers.");
     }
-
-
 }
