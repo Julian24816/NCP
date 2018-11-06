@@ -1,7 +1,7 @@
 package w46;
 
 public class UpdateDot implements Runnable {
-    private Dot d;
+    private final Dot d;
     private int i;
 
     private UpdateDot(Dot d, int i) {
