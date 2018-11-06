@@ -12,11 +12,13 @@ public class UpdateDot implements Runnable {
     @Override
     public void run() {
         while (!Thread.currentThread().isInterrupted()) {
-            d.setX(i);
-            d.setY(i);
-            if (d.getX() != d.getY()) {
-                System.out.println("Warning! Race condition! Difference: Thread " + Thread.currentThread().getName() +
-                        " | X = " + d.getX() + " | Y = " + d.getY());
+            synchronized (d) {
+                d.setX(i);
+                d.setY(i);
+                if (d.getX() != d.getY()) {
+                    System.out.println("Warning! Race condition! Difference: Thread " + Thread.currentThread().getName() +
+                            " | X = " + d.getX() + " | Y = " + d.getY());
+                }
             }
         }
     }
