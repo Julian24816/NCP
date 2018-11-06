@@ -1,25 +1,24 @@
 package w46;
 
+import java.util.LinkedList;
+import java.util.List;
+
 class Tester extends Thread {
     private UniqueSequenceGenerator uniqueSequenceGenerator;
-    private Tester another;
-    private int lastID;
+    List<Integer> attainedIDs = new LinkedList<>();
 
     Tester(UniqueSequenceGenerator uniqueSequenceGenerator) {
         this(uniqueSequenceGenerator, null);
     }
     Tester(UniqueSequenceGenerator uniqueSequenceGenerator, Tester anotherTester) {
         this.uniqueSequenceGenerator = uniqueSequenceGenerator;
-        this.another = anotherTester;
-        this.lastID = 0;
+
     }
 
     @Override
     public void run() {
         while (!isInterrupted()) {
-            lastID = uniqueSequenceGenerator.getNext();
-            if (another != null && another.lastID == lastID)
-                System.out.println("duplicate Value attained: " + lastID);
+            attainedIDs.add(uniqueSequenceGenerator.getNext());
         }
     }
 }

@@ -4,7 +4,7 @@ import java.util.Vector;
 
 class UniqueNumberList {
     private Vector<Integer> list = new Vector<>();
-    void add(Integer i) {
+    synchronized void add(Integer i) {
         if (!list.contains(i))
             list.add(i);
     }
