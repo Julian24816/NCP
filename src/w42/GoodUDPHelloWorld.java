@@ -1,9 +1,8 @@
-package w43;
+package w42;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.util.Arrays;
 
 public class GoodUDPHelloWorld {
 

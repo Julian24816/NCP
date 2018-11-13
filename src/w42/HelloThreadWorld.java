@@ -1,4 +1,4 @@
-package w43;
+package w42;
 
 public class HelloThreadWorld {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package w43;
+package w42;
 
 import java.util.Random;
 

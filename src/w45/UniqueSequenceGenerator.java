@@ -1,4 +1,4 @@
-package w46;
+package w45;
 
 public class UniqueSequenceGenerator {
     private int value = 0;

@@ -1,4 +1,4 @@
-package w43;
+package w42;
 
 public class MyThread extends Thread {
     private final int ID;

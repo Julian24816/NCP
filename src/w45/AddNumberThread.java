@@ -1,6 +1,5 @@
-package w46;
+package w45;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 

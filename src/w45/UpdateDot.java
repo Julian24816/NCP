@@ -1,4 +1,4 @@
-package w46;
+package w45;
 
 public class UpdateDot implements Runnable {
     private final Dot d;
