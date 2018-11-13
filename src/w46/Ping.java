@@ -19,6 +19,7 @@ public class Ping extends Thread {
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
+            interrupt();
         }
     }
 }

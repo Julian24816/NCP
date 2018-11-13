@@ -19,6 +19,7 @@ public class Pong extends Thread {
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
+            interrupt();
         }
     }
 }
