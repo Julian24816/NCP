@@ -41,36 +41,37 @@ class PingPong {
     private int i = 0;
 
     void ping() {
-        try {
-            if (lock1.tryLock()) {
+        if (lock1.tryLock()) {
+            try {
                 System.out.println("PING got Monitor 1");
-                try {
-                    if (lock2.tryLock()) {
+                if (lock2.tryLock()) {
+                    try {
+
                         System.out.println("PING got Monitor 2" + ++i);
+                    } finally {
+                        lock2.unlock();
                     }
-                } finally {
-                    lock2.unlock();
                 }
+            } finally {
+                lock1.unlock();
             }
-        } finally {
-            lock1.unlock();
         }
     }
 
     void pong() {
-        try {
-            if (lock2.tryLock()) {
+        if (lock2.tryLock()) {
+            try {
                 System.out.println("PONG got Monitor 2");
-                try {
-                    if (lock1.tryLock()) {
+                if (lock1.tryLock()) {
+                    try {
                         System.out.println("PONG got Monitor 1" + ++i);
+                    } finally {
+                        lock1.unlock();
                     }
-                } finally {
-                    lock1.unlock();
                 }
+            } finally {
+                lock2.unlock();
             }
-        } finally {
-            lock2.unlock();
         }
     }
 }
