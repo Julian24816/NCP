@@ -1,7 +1,7 @@
 package w47;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class DeadLockTraining {
     public static void main(String[] args) {
@@ -36,25 +36,41 @@ public class DeadLockTraining {
 
 class PingPong {
 
-    private final Object Monitor1 = new Object();
-    private final Object Monitor2 = new Object();
+    private final Lock lock1 = new ReentrantLock();
+    private final Lock lock2 = new ReentrantLock();
     private int i = 0;
 
     void ping() {
-        synchronized (Monitor1) {
-            System.out.println("PING got Monitor 1");
-            synchronized (Monitor2) {
-                System.out.println("PING got Monitor 2" + ++i);
+        try {
+            if (lock1.tryLock()) {
+                System.out.println("PING got Monitor 1");
+                try {
+                    if (lock2.tryLock()) {
+                        System.out.println("PING got Monitor 2" + ++i);
+                    }
+                } finally {
+                    lock2.unlock();
+                }
             }
+        } finally {
+            lock1.unlock();
         }
     }
 
     void pong() {
-        synchronized (Monitor2) {
-            System.out.println("PONG got Monitor 2");
-            synchronized (Monitor1) {
-                System.out.println("PONG got Monitor 1" + ++i);
+        try {
+            if (lock2.tryLock()) {
+                System.out.println("PONG got Monitor 2");
+                try {
+                    if (lock1.tryLock()) {
+                        System.out.println("PONG got Monitor 1" + ++i);
+                    }
+                } finally {
+                    lock1.unlock();
+                }
             }
+        } finally {
+            lock2.unlock();
         }
     }
 }
