@@ -1,13 +1,12 @@
 package w48;
 
-import java.util.Arrays;
 import java.util.concurrent.Semaphore;
 
 public class SemaphoreThreads extends Thread {
 
     private Semaphore semaphore;
 
-    public SemaphoreThreads(Semaphore semaphore) {
+    private SemaphoreThreads(Semaphore semaphore) {
         this.semaphore = semaphore;
     }
 
