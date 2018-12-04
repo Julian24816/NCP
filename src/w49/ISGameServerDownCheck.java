@@ -14,9 +14,10 @@ public class ISGameServerDownCheck {
         ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
         ScheduledFuture<?> scheduledTask = scheduledExecutorService.scheduleAtFixedRate(
-                () -> System.out.println(random.nextInt(2) == 0 ? "game server down" : "still connected."),
+                () -> System.out.println(random.nextBoolean() ? "game server down" : "still connected."),
                 0, 30, TimeUnit.SECONDS);
         scheduledExecutorService.schedule(() -> scheduledTask.cancel(true), 10, TimeUnit.MINUTES);
+
         scheduledExecutorService.shutdownNow();
     }
 }
