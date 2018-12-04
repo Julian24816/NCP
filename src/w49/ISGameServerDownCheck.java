@@ -15,7 +15,7 @@ public class ISGameServerDownCheck {
                 0, 1, TimeUnit.SECONDS);
         scheduledExecutorService.schedule(() -> scheduledTask.cancel(true), 10, TimeUnit.SECONDS);
 
-        try {scheduledTask.get();} catch (CancellationException e) {}
+        try {scheduledTask.get();} catch (CancellationException ignored) {}
         scheduledExecutorService.shutdownNow();
     }
 }
