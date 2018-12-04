@@ -24,12 +24,18 @@ public class BlockingQueueRandomNumberProducerConsumerStuffThreads {
         });
         producer.start();
         consumer.start();
-        try {Thread.sleep(1000);} catch (InterruptedException e) { System.out.println("sleep interrupted"); }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            System.out.println("sleep interrupted");
+        }
         producer.interrupt();
         consumer.interrupt();
         try {
             producer.join();
             consumer.join();
-        } catch (InterruptedException e) { System.out.println("join interrupted"); }
+        } catch (InterruptedException e) {
+            System.out.println("join interrupted");
+        }
     }
 }

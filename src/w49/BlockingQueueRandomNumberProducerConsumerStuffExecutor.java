@@ -22,8 +22,16 @@ public class BlockingQueueRandomNumberProducerConsumerStuffExecutor {
                 Thread.currentThread().interrupt();
             }
         });
-        try {Thread.sleep(1000);} catch (InterruptedException e) { System.out.println("sleep interrupted"); }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            System.out.println("sleep interrupted");
+        }
         executorService.shutdownNow();
-        try { executorService.awaitTermination(1000, TimeUnit.MILLISECONDS); } catch (InterruptedException e) { e.printStackTrace(); }
+        try {
+            executorService.awaitTermination(1000, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
