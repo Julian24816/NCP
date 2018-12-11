@@ -11,6 +11,8 @@ import java.util.concurrent.RecursiveTask;
 
 
 public class ImageUtils {
+    private static final int SPLIT_SPACE = 5;
+    private static final int WIDTH_THRESHOLD = 100;
 
     private static class RecursiveGeneration extends RecursiveTask<BufferedImage> {
 
@@ -29,11 +31,11 @@ public class ImageUtils {
         }
 
         private BufferedImage splitTheWork(int width, int height) {
-            int splitWidth = Math.min(WIDTH_THRESHOLD, width / 2);
-            ForkJoinTask<BufferedImage> task1 = new RecursiveGeneration(splitWidth, height).fork(),
-                    task2 = new RecursiveGeneration(width - splitWidth, height).fork();
+            int splitWidth = width / 2;
+            ForkJoinTask<BufferedImage> task1 = new RecursiveGeneration(splitWidth - SPLIT_SPACE, height).fork(),
+                    task2 = new RecursiveGeneration(width - splitWidth - SPLIT_SPACE, height).fork();
             task1.fork();
-            return joinBufferedImage(task1.join(), task2.join(), 0);
+            return joinBufferedImage(task1.join(), task2.join(), SPLIT_SPACE * 2);
         }
 
         private boolean shouldSplitTheWork(int width) {
@@ -42,10 +44,8 @@ public class ImageUtils {
 
     }
 
-    private static final int WIDTH_THRESHOLD = 100;
-
     // test
-    public static void main (String [] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         save(new RecursiveGeneration(1200, 300).fork().join(), "./" + "output" + ".bmp");
     }
 
@@ -96,10 +96,10 @@ public class ImageUtils {
 
     private static BufferedImage joinBufferedImage(BufferedImage img1, BufferedImage img2, int offset) {
 
-        int width = img1.getWidth()+img2.getWidth()+offset;
-        int height = Math.max(img1.getHeight(),img2.getHeight()); //+offset;
+        int width = img1.getWidth() + img2.getWidth() + offset;
+        int height = Math.max(img1.getHeight(), img2.getHeight()); //+offset;
 
-        BufferedImage newImage = new BufferedImage(width,height, BufferedImage.TYPE_INT_RGB);
+        BufferedImage newImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = newImage.createGraphics();
         Color oldColor = g2.getColor();
 //        fill background
@@ -107,8 +107,8 @@ public class ImageUtils {
         g2.fillRect(0, 0, width, height);
 //        draw image
         g2.setColor(oldColor);
-        g2.drawImage(img1, 0, 0,null);
-        g2.drawImage(img2, img1.getWidth()+offset,0, null);
+        g2.drawImage(img1, 0, 0, null);
+        g2.drawImage(img2, img1.getWidth() + offset, 0, null);
         g2.dispose();
         return newImage;
     }
