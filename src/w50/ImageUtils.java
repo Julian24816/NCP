@@ -45,7 +45,7 @@ public class ImageUtils {
     }
 
     // test
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         save(new RecursiveGeneration(1200, 300).fork().join(), "./" + "output" + ".bmp");
     }
 
@@ -94,6 +94,7 @@ public class ImageUtils {
         }
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static BufferedImage joinBufferedImage(BufferedImage img1, BufferedImage img2, int offset) {
 
         int width = img1.getWidth() + img2.getWidth() + offset;
