@@ -1,18 +1,18 @@
 package w48;
 
-class Stopwatch {
+public class Stopwatch {
     private long startTime;
 
-    Stopwatch() {
+    public Stopwatch() {
         reset();
     }
 
-    void reset() {
-        this.startTime = System.currentTimeMillis();
+    public void reset() {
+        this.startTime = System.nanoTime();
     }
 
     @Override
     public String toString() {
-        return String.valueOf((System.currentTimeMillis() - startTime) / 1000.);
+        return String.valueOf((System.nanoTime() - startTime) / 1000000.);
     }
 }
