@@ -13,6 +13,6 @@ public class Stopwatch {
 
     @Override
     public String toString() {
-        return String.valueOf((System.nanoTime() - startTime) / 1000000.);
+        return String.valueOf((System.nanoTime() - startTime) / 1_000_000_000.);
     }
 }
