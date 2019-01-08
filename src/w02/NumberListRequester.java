@@ -9,7 +9,7 @@ public class NumberListRequester implements Runnable {
     private List<Integer> numbers = new LinkedList<>();
     private int maxInt;
 
-    public NumberListRequester(AtomicUniqueSequenceGenerator sequenceGenerator, int maxInt) {
+    NumberListRequester(AtomicUniqueSequenceGenerator sequenceGenerator, int maxInt) {
         this.sequenceGenerator = sequenceGenerator;
         this.maxInt = maxInt;
     }
@@ -20,7 +20,7 @@ public class NumberListRequester implements Runnable {
             numbers.add(sequenceGenerator.getNextValue());
     }
 
-    public List<Integer> getNumbers() {
+    List<Integer> getNumbers() {
         return numbers;
     }
 }

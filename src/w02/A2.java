@@ -3,7 +3,7 @@ package w02;
 import java.sql.*;
 
 public class A2 {
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+    public static void main(String[] args) throws ClassNotFoundException {
         Class.forName("org.sqlite.JDBC");
         ThreadLocal<Connection> localConnection = ThreadLocal.withInitial(() -> {
             try {
