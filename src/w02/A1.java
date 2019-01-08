@@ -30,5 +30,6 @@ public class A1 {
         Future result2 = executorService.submit(list2);
         result1.get();
         result2.get();
+        executorService.shutdown();
     }
 }
